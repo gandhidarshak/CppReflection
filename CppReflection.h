@@ -6,6 +6,9 @@
  * @date 2019-11-04
  */
 
+#ifndef CppReflection_h_
+#define CppReflection_h_
+
 #include <iostream>
 #include <string>
 #include <array>
@@ -418,3 +421,4 @@ namespace CppReflection {
       }
 }
 
+#endif // CppReflection_h_
