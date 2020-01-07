@@ -17,17 +17,17 @@
 /**
  * @brief Macro to call reflect with mode = List, each variable/sub-var is printed in new lines.
  */
-#define CppReflectAsList(args...) CppReflection::reflect(CppReflection::List, #args, args)
+#define CppReflectAsList(...) CppReflection::reflect(CppReflection::List, #__VA_ARGS__, __VA_ARGS__)
 
 /**
  * @brief Macro to call reflect with mode = CSV, to print variables in comma separated way
  */
-#define CppReflectAsCSV(args...) CppReflection::reflect(CppReflection::CSV, #args, args)
+#define CppReflectAsCSV(...) CppReflection::reflect(CppReflection::CSV, #__VA_ARGS__, __VA_ARGS__)
 
 /**
  * @brief Macro to call reflect with mode that was set using last *As* macros. 
  */
-#define CppReflect(args...) CppReflection::reflect(CppReflection::mode, #args, args)
+#define CppReflect(...) CppReflection::reflect(CppReflection::mode, #__VA_ARGS__, __VA_ARGS__)
 
 /**
  * @brief Name-space to encompass each struct/variable/functions for * CppReflection library
