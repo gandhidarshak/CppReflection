@@ -262,6 +262,73 @@ namespace CppReflection {
                                                         is_tuple );
          };
 
+      //------------------------------------------------------------------------
+      // Declaration
+      //------------------------------------------------------------------------
+      /**
+       * @brief print variable that has an API named reflect
+       */
+      template<typename T>
+         typename std::enable_if<stream_var<std::ostringstream, T>::has_reflect, void>::type
+         _processNameValue(std::ostringstream& oBuffer, const std::string& varT, const T& t);
+
+      /**
+       * @brief print variable that has << operator defined
+       */
+      template<typename T>
+         typename std::enable_if<stream_var<std::ostringstream, T>::has_ltlt, void>::type
+         _processNameValue(std::ostringstream& oBuffer, const std::string& varT, const T& t);
+
+      /**
+       * @brief print variable of tuple type - terminating condition function.
+       */
+      template<typename T, std::size_t N = 0>
+         typename std::enable_if< N == std::tuple_size<T>::value, void>::type
+         reflectTuple(std::ostringstream& oBuffer, const std::string& varT, const T& t);
+
+      /**
+       * @brief print variable of tuple type - incrementally print next elements.
+       */
+      template<typename T, std::size_t N = 0>
+         typename std::enable_if< N < std::tuple_size<T>::value, void>::type
+         reflectTuple(std::ostringstream& oBuffer, const std::string& varT, const T& t);
+
+      /**
+       * @brief print variable of tuple type 
+       */
+      template<typename T>
+         typename std::enable_if<stream_var<std::ostringstream, T>::is_tuple, void>::type
+         _processNameValue(std::ostringstream& oBuffer, const std::string& varT, const T& t);
+
+      /**
+       * @brief print container variable 
+       */
+      template<typename T>
+         typename std::enable_if<stream_var<std::ostringstream, T>::is_container, void>::type
+         _processNameValue(std::ostringstream& oBuffer, const std::string& varT, const T& t);
+
+      /**
+       * @brief If an unsupported variable is used, SFINAE will invoke this API.
+       */
+      template<typename T>
+         typename std::enable_if<stream_var<std::ostringstream, T>::not_printable, void>::type
+         _processNameValue(std::ostringstream& oBuffer, const std::string& varT, const T& t);
+
+      /**
+       * @brief terminating condition function when all variables are completed.
+       */
+      void _reflect(std::ostringstream& oBuffer, std::string nameStr);
+
+      /**
+       * @brief Pick one variable and print it, call recursively to print all variables
+       */
+      template<typename T, typename... TRest>
+         void _reflect(std::ostringstream& oBuffer, std::string nameStr,
+                       const T& t, const TRest&... tRest);
+
+      //------------------------------------------------------------------------
+      // Definition 
+      //------------------------------------------------------------------------
       /**
        * @brief print variable that has an API named reflect
        */

@@ -36,11 +36,14 @@ int main()
    std::map<std::string, int> var7 = {{"One", 1},{"Two", 2}, {"Three", 3}};
    std::set<std::array<int,3>> var8 = {{51,52,53}, {61,62,63}, {71,72,73}};
    auto var9 = std::make_tuple ("United States", "California", "San Franscisco", 94115);
-   Foo var10;
+   std::map<std::string,
+      std::vector<std::string>> var10 = {{"Colors", {"Red", "Green", "Blue"}},
+         {"Shapes", {"Square", "Circle", "Hexagone"}} };
+   Foo var11;
 
    std::cout << "Output of CppReflectAsList : " << std::endl;
-   std::cout << CppReflectAsList(var0, var1 , p_var1, *p_var1, var2 , var3 , var4 , var5 , var6 , var7, var8, var9, var10) << std::endl;
+   std::cout << CppReflectAsList(var0, var1 , p_var1, *p_var1, var2 , var3 , var4 , var5 , var6 , var7, var8, var9, var10, var11) << std::endl;
    std::cout << "Output of CppReflectAsCsv : " << std::endl;
-   std::cout << CppReflectAsCSV(var0, var1 , p_var1, *p_var1, var2 , var3 , var4 , var5 , var6 , var7, var8, var9, var10) << std::endl;
+   std::cout << CppReflectAsCSV(var0, var1 , p_var1, *p_var1, var2 , var3 , var4 , var5 , var6 , var7, var8, var9, var10, var11) << std::endl;
    return 0;
 }
